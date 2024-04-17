@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+
+<pdf>
+
+   <head>
+
+      <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+      <#if .locale == "zh_CN">
+         <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+      <#elseif .locale == "zh_TW">
+         <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+      <#elseif .locale == "ja_JP">
+         <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+      <#elseif .locale == "ko_KR">
+         <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+      <#elseif .locale == "th_TH">
+         <link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+      </#if>
+
+      <macrolist>
+
+         <macro id="nlheader">
+         </macro>
+
+         <macro id="nlfooter">
+			</macro>
+
+      </macrolist>
+
+      <style>
+
+         table{
+            border: 0px solid black;
+         }
+
+         td{
+            border: 0px solid black;
+         }
+
+         th{
+            border: 0px solid black;
+         }
+
+         html,body{
+            height:297mm;
+            width:210mm;
+         }
+
+         /* span{
+            font-family: Arial, sans-serif;
+         } */
+		 
+
+      </style>
+
+   </head>
+
+   <body header="nlheader" header-height="0cm" footer="nlfooter" footer-height="0cm" padding="1.25cm 0.4cm 0.1cm 0.7cm">
+																																 
+
+      <#assign posicao = 0>
+      <#setting locale="pt_BR">
+      <#list objToRender.arrayDataToRender as elementToRender>
+
+            <#assign posicao = posicao + 1>
+
+            <#if posicao % 97 == 0>
+               <#assign posicao = 1>
+               <p style="break-before: always; padding: 0px; margin: 0px;" />
+            </#if>
+
+            <#if elementToRender.visible == "true">
+
+               <table cellpadding="0" padding-left="0.05cm" padding-right="0.05cm" cellspacing="0" style="float: left; width: 3.1cm; height: 1.7cm;">
+
+                  <tr>
+
+                     <td colspan="2" rowspan="1" align="left" style="width: 3.1cm; height: 0.2125cm; vertical-align: middle;">
+                     </td>
+
+                  </tr>
+
+                  <tr>
+
+                     <td colspan="2" rowspan="1" align="left" style="width: 3.1cm; height: 0.65cm; vertical-align: middle;">
+
+                           <table cellpadding="0" cellspacing="0" style="float: left; width: 3.1cm; height: 0.65cmcm;">
+
+                              <tr>
+
+                                 <td colspan="1" rowspan="1" align="left" style="width: 0.8cm; height: 0.65cmcm; vertical-align: middle;">
+                                    <span style="font-size:6px;">&#160;&#160;&#160;${elementToRender.itemId}<br />&#160;&#160;&#160;${elementToRender.itemData}</span>
+                                 </td>
+
+                                 <td colspan="1" rowspan="1" align="right" style="width: 2.3cm; height: 0.65cmcm; vertical-align: middle;">
+                                    <span style="font-size:10px; font-family: Times New Roman,Times,serif;">R$</span>
+                                    <span style="font-size:16px; font-family:Times New Roman,Times,serif;">${elementToRender.price?number?string[",##0"]}&#160;&#160;</span>
+                                 </td>
+
+                              </tr>
+
+                           </table>
+
+                     </td>
+
+                  </tr>
+
+                  <tr>
+
+                     <td colspan="1" rowspan="1" align="left" style="width: 1.8cm; height: 0.2cm; vertical-align: middle;">
+                        <span style="font-size:6px;">&#160;&#160;&#160;${elementToRender.brand}</span>
+                     </td>
+
+                     <td colspan="1" rowspan="1" align="left" style="width: 1.3cm; height: 0.2cm; vertical-align: middle;">
+                        <span style="font-size:6px;">${elementToRender.materialOfManufacture}</span>
+                     </td>
+
+                  </tr>
+
+                  <tr>
+                      
+                     <#assign descri1 = "">
+                     <#assign descri2 = "">
+                     <#assign descriAux = elementToRender.description?string>
+                     <#assign descriSize = descriAux?length>
+
+                     <#if descriSize < 30>
+
+                        <#assign descri1 = descriAux[0..descriSize - 1]>
+
+                     <#elseif descriSize == 30>
+
+                        <#assign descri1 = descriAux?string[0..29]>
+
+                     <#else>
+
+                        <#assign descri1 = descriAux?string[0..29]>
+
+                        <#assign descriAux2 = descriAux?string[30..]>
+                        <#assign descriSize2 = descriAux2?length>
+
+                        <#if descriSize2 < 30>
+
+                           <#assign descri2 = descriAux2[0..descriSize2 - 1]>
+
+                        <#elseif descriSize2 == 30>
+
+                           <#assign descri2 = descriAux2?string[0..29]>
+
+                        <#else>
+
+                           <#assign descri2 = descriAux2?string[0..29]>
+
+                        </#if>
+
+                     </#if>
+
+                     <td colspan="2" rowspan="1" align="left" style="width: 3.1cm; height: 0.6375cm; padding: 0cm; vertical-align: middle;">
+                        <span style="font-size:6px;">&#160;&#160;&#160;${descri1}<br />&#160;&#160;&#160;${descri2}</span>
+                     </td>
+
+                  </tr>
+
+               </table>
+
+            <#else>
+
+               <table cellpadding="0" padding-left="0.05cm" padding-right="0.05cm" cellspacing="0" style="float: left; width: 3.1cm; height: 1.7cm; table-layout: fixed;">
+
+                  <tr>
+
+                     <td colspan="2" rowspan="1" align="left" style="width: 3.1cm; height: 0.2125cm; vertical-align: middle;">
+                        <span style="font-size:5px;">${elementToRender.itemId}</span>
+                     </td>
+
+                  </tr>
+
+                  <tr>
+
+                     <td colspan="2" rowspan="1" align="right" style="width: 3.1cm; height: 0.425cm; vertical-align: middle;">
+                        <span style="font-size:9px;">${elementToRender.price?number?string[",##0.00"]}</span>
+                     </td>
+
+                  </tr>
+
+                  <tr>
+
+                     <td colspan="1" rowspan="1" align="left" style="width: 1.55cm; height: 0.425cm; vertical-align: middle;">
+                        <span style="font-size:5px;">${elementToRender.brand}</span>
+                     </td>
+
+                     <td colspan="1" rowspan="1" align="left" style="width: 1.55cm; height: 0.425cm; vertical-align: middle;">
+                        <span style="font-size:5px;">${elementToRender.materialOfManufacture}</span>
+                     </td>
+
+                  </tr>
+
+                  <tr>
+
+                     <td colspan="2" rowspan="1" align="left" style="width: 3.1cm; height: 0.6375cm; padding: 0cm; vertical-align: middle;">
+                        <span style="font-size:6px;">${elementToRender.description}${elementToRender.description}</span>
+                     </td>
+
+                  </tr>
+
+               </table>
+
+            </#if>
+
+            <table cellpadding="1" cellspacing="1" style="float: left; width: 0.2cm; height: 1.7cm; table-layout: fixed;">
+               <tr><td colspan="1" rowspan="1" style="width: 0.2cm; height: 1.7cm;"></td></tr>
+            </table>
+
+      </#list>
+
+   </body>
+
+</pdf>

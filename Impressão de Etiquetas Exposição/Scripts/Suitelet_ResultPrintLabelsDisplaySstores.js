@@ -47,7 +47,8 @@ define([
          var response = context.response;
 
          var inciar = context.request.parameters['iniciar'];
-         // var listItem = context.request.parameters['custscript_oav_listitem'];
+         var installmentQty = context.request.parameters['installmentQty'];
+         log.debug('installmentQty',installmentQty);
          // var listItem = runtime.getCurrentScript().getParameter({name: 'custscript_oav_listitem'})
 
          var rec = record.load({
@@ -60,7 +61,7 @@ define([
          });
          
          listItem = JSON.parse(listItem);
-		 log.debug('listItem',listItem);
+		   log.debug('listItem',listItem);
          var layout = file.load("../Relatorios/custtmpl_oav_resultprintlabelsdisplaysotres.html");
 
          var renderer = new render.create();
@@ -82,8 +83,6 @@ define([
          ////////////////////////////////////////////////////////////////////////////////////////////////////
          listItem.forEach(function(itemObj){
             
-            log.debug('itemObj',itemObj);
-
             var objTesteOne = createStandardObjs();
 
             objTesteOne.visible = true;
@@ -92,6 +91,10 @@ define([
             objTesteOne.description = objTesteOne.description.replace(/\&/g, '&amp;');
             objTesteOne.description = objTesteOne.description.replace(/\n/g, '');
             objTesteOne.price =itemObj.salePrice;
+
+            objTesteOne.installmentQty = installmentQty
+            objTesteOne.installmentPrice = (itemObj.salePrice / objTesteOne.installmentQty).toFixed(2)
+
             // log.debug('objTesteOne.price',objTesteOne.price);
             objTesteOne.date = itemObj.date;
             // log.debug('objTesteOne.data',objTesteOne.data);
@@ -110,7 +113,7 @@ define([
             // });
 
             objTesteOne.itemData = objTesteOne.date; //'25/11/2021';
-
+            log.debug('objTesteOne',objTesteOne);
             objToRender.arrayDataToRender.push(objTesteOne);
             objToRender.arrayDataToRender.push(objTesteOne);
          });
@@ -145,7 +148,8 @@ define([
          obj.brand = '';
          obj.materialOfManufacture = '';
          obj.date = '';
-
+         obj.installmentQty = 0
+         obj.installmentPrice = 0
          return obj;
 
       }

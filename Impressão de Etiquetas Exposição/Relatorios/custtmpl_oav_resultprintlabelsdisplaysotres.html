@@ -94,8 +94,9 @@
                                  </td>
 
                                  <td colspan="1" rowspan="1" align="right" style="width: 2.3cm; height: 0.65cmcm; vertical-align: middle;">
+                                    <span style="font-size:6px; font-family: Times New Roman,Times,serif;">${elementToRender.installmentQty}x</span>
                                     <span style="font-size:10px; font-family: Times New Roman,Times,serif;">R$</span>
-                                    <span style="font-size:16px; font-family:Times New Roman,Times,serif;">${elementToRender.price?number?string[",##0"]}&#160;&#160;</span>
+                                    <span style="font-size:16px; font-family:Times New Roman,Times,serif;">${elementToRender.installmentPrice?number?string}&#160;&#160;</span>
                                  </td>
 
                               </tr>
@@ -108,13 +109,11 @@
 
                   <tr>
 
-                     <td colspan="1" rowspan="1" align="left" style="width: 1.8cm; height: 0.2cm; vertical-align: middle;">
-                        <span style="font-size:6px;">&#160;&#160;&#160;${elementToRender.brand}</span>
+                     <td colspan="1" rowspan="1" align="left" style="width: 3.1cm; height: 0.2cm; vertical-align: middle;">
+                        <span style="font-size:6px;">&#160;&#160;&#160;${elementToRender.brand} | ${elementToRender.materialOfManufacture} | R$ ${elementToRender.price?number?string}</span>
                      </td>
 
-                     <td colspan="1" rowspan="1" align="left" style="width: 1.3cm; height: 0.2cm; vertical-align: middle;">
-                        <span style="font-size:6px;">${elementToRender.materialOfManufacture}</span>
-                     </td>
+                    
 
                   </tr>
 

@@ -528,6 +528,13 @@ define([
                "custpage_inicio_em":parametersObj.inicioEm
             })
 
+            var installmentQtyField = form.addField({
+               id: 'custpage_installmentqty',
+               type: serverWidget.FieldType.INTEGER,
+               label: 'Quantidade de parcelamento'
+            });
+            installmentQtyField.defaultValue = 10
+
             // Busca para carregar as informações dos IDs do Item denominado Codigo Barras/////
             var itemSearchObj = search.create({
                type: "item",

@@ -320,9 +320,8 @@ define([
         
          var currentRec = currentRecord.get();
          var lang = runtime.getCurrentUser().getPreference("LANGUAGE").toString();
-         var inicioEM = currentRec.getValue({
-            fieldId: 'custpage_inicio_em'
-         });
+         var installmentQty = currentRec.getValue({fieldId: 'custpage_installmentqty'});
+         var inicioEM = currentRec.getValue({fieldId: 'custpage_inicio_em'});
          if (!inicioEM) {
             alert("Campo Inciar EM é obrigatorio");
             return false;
@@ -409,7 +408,7 @@ define([
              deploymentId: 1,
             //  returnExternalUrl: true,
             params: {
-               // custscript_oav_listitem: JSON.stringify(checkedLinessArr),
+               installmentQty: installmentQty,
                iniciar:inicioEM -1
             }
          });
